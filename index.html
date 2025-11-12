@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho sobre análise comportamental</title>
+    <link rel="shortcut icon" href="./src/pythonIcone.png" type="image/x-icon">
+
+    <style>
+
+        body{
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            background-color: #0F1A28;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #voltar, #avancar{
+            position: absolute;
+            top: 50%;
+            bottom: 50%;
+            background-color: rgb(129, 96, 153);
+            border-radius: 5px;
+            padding: 10px;
+            padding-bottom: 20px;
+        }
+
+        #voltar{ left: 1%; }
+
+        #avancar{ right: 1%; }
+
+        #voltar:focus, #voltar:hover, #avancar:focus, #avancar:hover{
+            color: lime;
+            background-color: rgb(192, 160, 214);
+        }
+
+        #slideShow{
+            z-index: -1;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+        <img src="./src/slide1.png" alt="slide" id="slideShow">
+
+        <button id="voltar">◄</button>
+
+        <button id="avancar">►</button>
+
+        <script>
+
+            let slideAtual = 1;
+            
+            const slideShow = document.getElementById("slideShow");
+            
+            const voltar = document.getElementById("voltar");
+            
+            const avancar = document.getElementById("avancar");
+
+            function mudarSlide (direcao) {
+
+                slideAtual += direcao;
+
+                if (slideAtual > 5) slideAtual = 1;
+
+                else if (slideAtual < 1) slideAtual = 5;
+
+                slideShow.src = `./src/slide${slideAtual}.png`;
+            }
+            
+            voltar.addEventListener("click", () => mudarSlide(-1));
+            
+            avancar.addEventListener("click", () => mudarSlide(1));
+
+        </script>
+    
+</body>
+</html>
