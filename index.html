@@ -16,6 +16,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            font-size: larger;
         }
 
         #voltar, #avancar{
@@ -75,6 +76,28 @@
             left: 70%;
             right: 30%;
         }
+
+    }
+        
+        .escondido{ display: none; }
+
+        #referencias:not(.escondido){
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: larger;
+            color: aliceblue;
+        }
+
+        ul{ align-items: flex-start; }
+
+        li{
+            text-align: left;
+            margin: 15px;
+            max-width: 90%;
+            min-width: 10ch;
+            overflow-wrap: break-word;
         }
 
     </style>
@@ -89,6 +112,64 @@
 
         <button id="avancar">►</button>
 
+        <section id="referencias" class="escondido">
+
+            <h1>Referências (fontes)</h1>
+
+            <ul>
+
+                <li>
+                    Alura - Python: Inteligência artificial aplicada
+                </li>
+
+                <li>
+                    Alura - Python para Data Science
+                </li>
+
+                <li>
+                <strong>Scikit-learn (para o Modelo de Machine Learning):</strong> A documentação oficial é a fonte primária para todos os métodos que usamos (como <code>train_test_split</code>, <code>LogisticRegression</code>, <code>.fit()</code>, <code>.predict()</code> e <code>.predict_proba()</code>).
+            </li>
+
+            <li>
+                Scikit-learn: Machine Learning in Python. (Disponível em: https://scikit-learn.org/stable/documentation.html)
+            </li>
+
+            <li>
+                <strong>Pandas (para Manipulação de Dados):</strong> A documentação oficial do Pandas é a fonte para os métodos <code>.read_csv()</code> e, crucialmente, <code>.to_excel()</code>.
+            </li>
+
+            <li>
+                Pandas Development Team. (2020). pandas-dev/pandas: Pandas. (Disponível em: https://pandas.pydata.org/docs/)
+            </li>
+
+            <li>
+                <strong>Openpyxl (para o erro de escrita do Excel):</strong> O módulo que resolveu o <code>ModuleNotFoundError</code>. A documentação dele explica por que o Pandas precisa dele como "motor" (engine).
+                </li>
+
+                <li>
+                    Documentação Oficial do Openpyxl. (Disponível em: https://openpyxl.readthedocs.io/en/stable/)
+                </li>
+
+            <li>
+                <strong>Microsoft Power BI (para o Dashboard):</strong> A documentação da Microsoft é a fonte oficial para o uso da ferramenta, incluindo a lógica de agregação de dados (como a função "Não resumir" que usamos).
+            </li>
+
+            <li>
+                Documentação do Microsoft Power BI. (Disponível em: https://docs.microsoft.com/pt-br/power-bi/)
+            </li>
+
+            <li>
+                <strong>Conceito de "Churn Rate" (O Tema do Trabalho):</strong> Para a definição do problema de negócio (o que é Churn), meu conhecimento é baseado em como esse termo é usado em artigos de ciência de dados e negócios.
+            </li>
+
+            <li>
+                Artigos em plataformas como Medium (especificamente a publicação "Towards Data Science") ou sites de referência de negócios (como Investopedia ou Harvard Business Review) que definem "Customer Churn Rate".
+            </li>
+
+            </ul>
+
+        </section>
+
         <script>
 
             let slideAtual = 1;
@@ -98,6 +179,8 @@
             const voltar = document.getElementById("voltar");
             
             const avancar = document.getElementById("avancar");
+            
+            const referencias = document.getElementById("referencias");
 
             function mudarSlide (direcao) {
 
@@ -107,7 +190,21 @@
 
                 else if (slideAtual < 1) slideAtual = 8;
 
-                slideShow.src = `./src/slide${slideAtual}.png`;
+                if (slideAtual == 8) {
+
+                    referencias.classList.remove("escondido");
+
+                    slideShow.classList.add("escondido");
+                }
+
+                else {
+
+                    referencias.classList.add("escondido");
+
+                    slideShow.classList.remove("escondido");
+                    
+                    slideShow.src = `./src/slide${slideAtual}.png`;
+                }
             }
             
             voltar.addEventListener("click", () => mudarSlide(-1));
